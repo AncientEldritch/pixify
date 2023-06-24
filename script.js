@@ -50,10 +50,15 @@ const imageSets = [
 
   ];
 
- 
+ /*Submissions Page Cards*/ 
+
 const cardContainer = document.getElementById("gallery-card-container");
 
 imageSets.forEach((imageSet) => {
+  const card = createCard(imageSet);
+});
+
+function createCard(imageSet) {
   const card = document.createElement('div');
   const image = document.createElement('img');
   const title = document.createElement('p');
@@ -67,11 +72,42 @@ imageSets.forEach((imageSet) => {
   card.classList.add('gallery-card');
   image.classList.add("gallery-image");
   title.classList.add("gallery-title");
+  link.classList.add("gallery-link");
 
   card.appendChild(image);
   card.appendChild(title);
   card.appendChild(link);
 
   cardContainer.appendChild(card);
-});
+}
 
+let lastId = imageSets.length;
+
+function onSubmit() {
+console.log("Submit button clicked");
+
+const inputName = document.getElementById("input-name").value;
+const inputTitle = document.getElementById("input-title").value;
+
+console.log("Input Name:", inputName);
+console.log("Input Title:", inputTitle);
+
+const newImageSet = {
+  id: lastId++,
+  name: inputName,
+  images: []
+};
+
+for (let i = 1; i <= 5; i++) {
+  const inputImage = document.getElementById("input-url" + i).value;
+  if (inputImage.trim() !== '') {
+    newImageSet.images.push(inputImage);
+  }
+}
+
+imageSets.push(newImageSet);
+
+createCard(newImageSet);
+}
+
+document.getElementById("input-submit").addEventListener("click", onSubmit);
