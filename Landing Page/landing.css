@@ -1,0 +1,87 @@
+body, html {
+  height: 100%;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 25px;
+    background-color: var(--blue);
+    align-items: center;
+}
+
+#header-title {
+    color: var(--teal);
+    font-size: 36px;
+}
+
+nav {
+    color: white;
+    font-size: 16px;
+    display: flex;
+    gap: 20px;
+}
+
+main {
+    background-image: url(../assets/homepage.jpg);
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    
+}
+
+
+
+#page-content {
+   display: grid;
+   grid-template-columns: 2fr 1fr 1fr;
+   grid-template-rows: 1fr 1fr;
+   
+}
+
+#contest-blurb {
+    grid-row-start: 2;
+    grid-column-start: 1;
+    background-color: var(--blue);
+    border-radius: 50px 50px 50px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 25px;
+    flex-grow: 1;
+}
+
+p {
+    font-size: 30px;
+    color: white;
+}
+
+#submit-button {
+    grid-row-start: 2;
+    grid-column-start: 3;
+    background-color: transparent;
+    color: var(--teal);
+    border-color: var(--teal);
+    border-radius: 125px;
+    height: 50%;
+    font-size: 36px;
+    margin-top: 15%;
+    margin-right: 20px;
+}
+
+
+
