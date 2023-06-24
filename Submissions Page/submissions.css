@@ -32,3 +32,34 @@ body, html {
       display: flex;
       gap: 20px;
   }
+
+  header {
+    background-color: var(--blue);
+  }
+
+  main {
+    display: grid;
+    grid-template-areas: "left right";
+    margin: 70px;
+  }
+
+  #left-container {
+    grid-area: left;
+  }
+
+  #submission-form {
+    grid-area: right;
+  }
+
+  .gallery-image {
+    width: 50%;
+    border-radius: 20px;
+  }
+
+  #gallery-card-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 50px;
+    margin: 50px;
+  }

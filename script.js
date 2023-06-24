@@ -51,4 +51,27 @@ const imageSets = [
   ];
 
  
+const cardContainer = document.getElementById("gallery-card-container");
+
+imageSets.forEach((imageSet) => {
+  const card = document.createElement('div');
+  const image = document.createElement('img');
+  const title = document.createElement('p');
+  const link = document.createElement('a');
+  
+  image.setAttribute("src", imageSet.images[0]);
+  title.innerText = `${imageSet.title} - ${imageSet.name}`;
+  link.setAttribute("href", "../Gallery Page/gallery.html");
+  link.innerText = "See More";
+
+  card.classList.add('gallery-card');
+  image.classList.add("gallery-image");
+  title.classList.add("gallery-title");
+
+  card.appendChild(image);
+  card.appendChild(title);
+  card.appendChild(link);
+
+  cardContainer.appendChild(card);
+});
 
