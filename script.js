@@ -78,12 +78,14 @@ function createCard(imageSet) {
   card.appendChild(title);
   card.appendChild(link);
 
-  cardContainer.appendChild(card);
+  cardContainer.insertBefore(card, cardContainer.firstChild);
 }
 
 let lastId = imageSets.length;
 
-function onSubmit() {
+function onSubmit(e) {
+  e.preventDefault();
+
 console.log("Submit button clicked");
 
 const inputName = document.getElementById("input-name").value;
@@ -95,6 +97,7 @@ console.log("Input Title:", inputTitle);
 const newImageSet = {
   id: lastId++,
   name: inputName,
+  title: inputTitle,
   images: []
 };
 
