@@ -66,8 +66,10 @@ function createCard(imageSet) {
   
   image.setAttribute("src", imageSet.images[0]);
   title.innerText = `${imageSet.title} - ${imageSet.name}`;
-  link.setAttribute("href", "../Gallery Page/gallery.html");
+  link.setAttribute("href", `../Gallery Page/gallery.html?id=${imageSet.id}`);
   link.innerText = "See More";
+
+
 
   card.classList.add('gallery-card');
   image.classList.add("gallery-image");
@@ -81,16 +83,20 @@ function createCard(imageSet) {
   cardContainer.insertBefore(card, cardContainer.firstChild);
 }
 
-let lastId = imageSets.length;
+function navigateToGallery(selectedImageSet) {
+  localStorage.setItem("selectedImageSet", JSON.stringify(selectedImageSet));
+}
+
 
 function onSubmit(e) {
   e.preventDefault();
 
 const inputName = document.getElementById("input-name").value;
 const inputTitle = document.getElementById("input-title").value;
+let lastId = imageSets.length;
 
 const newImageSet = {
-  id: lastId++,
+  id: lastId +1,
   name: inputName,
   title: inputTitle,
   images: []
@@ -109,3 +115,22 @@ createCard(newImageSet);
 }
 
 document.getElementById("input-submit").addEventListener("click", onSubmit);
+
+/*Gallery Page*/
+
+const urlParams = new URLSearchParams(window.location.search);
+const selectedId = urlParams.get("id");
+
+const galleryTitle = document.getElementById("gallery-title");
+const galleryName = document.getElementById("photographer-name");
+const galleryImage = document.getElementById("gallery-image");
+const imageNumber = document.getElementById("image-number");
+const chosenImageSet =  imageSets[id];
+
+galleryTitle.innerText = chosenImageSet.title;
+galleryName.innerText = chosenImageSet.name;
+galleryImage.setAttribute = ("href", chosenImageSet.image[0]);
+imageNumber.innerText = `1 of ${chosenImageSet.images.length}`;
+
+
+
