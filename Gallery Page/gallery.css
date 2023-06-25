@@ -1,0 +1,31 @@
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 70px;
+}
+
+h1 {
+    font-weight: bold;
+    font-size: 46px;
+    margin: 15px;
+}
+
+#photographer-name {
+    font-size: 46px;
+}
+
+#gallery-image {
+    width: 40%;
+    padding: 15px;
+}
+
+#previous, #next {
+    margin: 15px;
+    width: 100px;
+    height: 25px;
+    border: none;
+    border-radius: 25px;
+    background-color: var(--blue);
+    color: var(--teal);
+}

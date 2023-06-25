@@ -71,16 +71,19 @@ p {
 }
 
 #submit-button {
+    display: flex;
     grid-row-start: 2;
     grid-column-start: 3;
     background-color: transparent;
     color: var(--teal);
-    border-color: var(--teal);
+    border:solid 1px var(--teal);
     border-radius: 125px;
     height: 50%;
     font-size: 36px;
     margin-top: 15%;
     margin-right: 20px;
+    align-items: center;
+    justify-content: center;
 }
 
 

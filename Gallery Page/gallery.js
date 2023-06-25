@@ -50,92 +50,73 @@ const imageSets = [
 
   ];
 
- /*Submissions Page Cards*/ 
+let chosenImageSet;
+let index = 0;
 
-const cardContainer = document.getElementById("gallery-card-container");
-
-imageSets.forEach((imageSet) => {
-  const card = createCard(imageSet);
-});
-
-function createCard(imageSet) {
-  const card = document.createElement('div');
-  const image = document.createElement('img');
-  const title = document.createElement('p');
-  const link = document.createElement('a');
-  
-  image.setAttribute("src", imageSet.images[0]);
-  title.innerText = `${imageSet.title} - ${imageSet.name}`;
-  link.setAttribute("href", `../Gallery Page/gallery.html?id=${imageSet.id}`);
-  link.innerText = "See More";
+window.onload = function(){
 
 
+    const urlParams = new URLSearchParams(window.location.search);
+    const selectedId = urlParams.get("id");
 
-  card.classList.add('gallery-card');
-  image.classList.add("gallery-image");
-  title.classList.add("gallery-title");
-  link.classList.add("gallery-link");
+    const galleryTitle = document.getElementById("gallery-title");
+    const galleryName = document.getElementById("photographer-name");
+    const galleryImage = document.getElementById("gallery-image");
+    const imageNumber = document.getElementById("image-number");
+    chosenImageSet =  imageSets.filter(item => item.id == selectedId)[0];
 
-  card.appendChild(image);
-  card.appendChild(title);
-  card.appendChild(link);
-
-  cardContainer.insertBefore(card, cardContainer.firstChild);
-}
-
-function navigateToGallery(selectedImageSet) {
-  localStorage.setItem("selectedImageSet", JSON.stringify(selectedImageSet));
-}
+    galleryTitle.innerText = chosenImageSet.title;
+    galleryName.innerText = chosenImageSet.name;
+    galleryImage.src = chosenImageSet.images[0];
+    imageNumber.innerText = `1 of ${chosenImageSet.images.length}`;
 
 
-function onSubmit(e) {
-  e.preventDefault();
-
-const inputName = document.getElementById("input-name").value;
-const inputTitle = document.getElementById("input-title").value;
-let lastId = imageSets.length;
-
-const newImageSet = {
-  id: lastId +1,
-  name: inputName,
-  title: inputTitle,
-  images: []
 };
 
-for (let i = 1; i <= 5; i++) {
-  const inputImage = document.getElementById("input-url" + i).value;
-  if (inputImage.trim() !== '') {
-    newImageSet.images.push(inputImage);
-  }
-}
+function prevNext(direction){
+    if(index < chosenImageSet.images.length - 1 && direction === "next") {
+        console.log(`up`)
+        index++;
+    } else if (index > 0 && direction === "previous") {
+        console.log(`dwn`)
+        index--;
+    }
+    document.getElementById("gallery-image").src = chosenImageSet.images[index];
+    document.getElementById("image-number").innerText = `${index + 1} of ${chosenImageSet.images.length}`;
+    }
 
-imageSets.push(newImageSet);
+    document.getElementById("previous").addEventListener("click", () => {
+      prevNext("previous");
+    });
+    document.getElementById("next").addEventListener("click", () => {
+      prevNext("next");
+    });
 
-createCard(newImageSet);
-}
-
-document.getElementById("input-submit").addEventListener("click", onSubmit);
- /*Dark/light mode*/
+    /*Dark/light mode*/
     
-const toggleButton = document.getElementById("display-toggle");
-const body = document.querySelector("body");
-  
-function colorMode() {
-  if (toggleButton.innerText === "Dark Mode") {
-    body.style.backgroundColor = "var(--blue)"
-    body.style.color = "white";
-    toggleButton.innerText = "Light Mode";
-  } else if (toggleButton.innerText === "Light Mode") {
-    body.style.backgroundColor = "white"
-    body.style.color = "black";
-    toggleButton.innerText = "Dark Mode";
-  }
-}
+    const toggleButton = document.getElementById("display-toggle");
+    const body = document.querySelector("body");
+    const previous = document.getElementById("previous");
+    const next = document.getElementById("next");
+    
+    function colorMode() {
+      const toggleButton = document.getElementById("display-toggle");
+      if (toggleButton.innerText === "Dark Mode") {
+        body.style.backgroundColor = "var(--blue)"
+        previous.style.border = "1px solid var(--teal)";
+        next.style.border = "1px solid var(--teal)";
+        body.style.color = "white";
+        toggleButton.innerText = "Light Mode";
+      } else if (toggleButton.innerText === "Light Mode") {
+        body.style.backgroundColor = "white"
+        previous.style.border = "none";
+        next.style.border = "none";
+        body.style.color = "black";
+        toggleButton.innerText = "Dark Mode";
+      }
+    }
 
-toggleButton.addEventListener("click", () => {
-  colorMode();
-});
-
-
-
+    toggleButton.addEventListener("click", () => {
+      colorMode();
+    });
 
