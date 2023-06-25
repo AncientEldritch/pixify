@@ -86,13 +86,8 @@ let lastId = imageSets.length;
 function onSubmit(e) {
   e.preventDefault();
 
-console.log("Submit button clicked");
-
 const inputName = document.getElementById("input-name").value;
 const inputTitle = document.getElementById("input-title").value;
-
-console.log("Input Name:", inputName);
-console.log("Input Title:", inputTitle);
 
 const newImageSet = {
   id: lastId++,
